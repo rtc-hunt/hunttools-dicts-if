@@ -7,10 +7,11 @@ import Data.Char
 import qualified Crossword
 import Data.DAWG.Packed64
 import Anagram
-import Paths_hunttools_dicts_non
+import System.Environment
 --import qualified Paths_hunttools as H
 -- import qualified Language.Lojban.Jbovlaste as JBO
 
+getDataFileName fn = (++ fn) <$> getEnv "HUNTTOOLS_DICTS_DIR"
 
 --getDataFileName = (!) $ read $ unsafePerformIO $ Paths_hunttools_dicts_if.getDataFileName "dictsMap.txt"
 
