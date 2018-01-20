@@ -1,6 +1,5 @@
 {-# LANGUAGE Trustworthy #-}
-module StandardDictionaries where
---module StandardDictionaries (sysDict, ukacd, onelook, sowpods) where
+module StandardDictionaries (sysDict, ukacd, onelook, sowpods) where
 import Dictionary
 import System.IO.Unsafe
 import Data.Char
@@ -20,6 +19,7 @@ sysDictDef = Dictionary
 	(AnagramDictionary $ unsafePerformIO $ getDataFileName "dictWordsAnagram.dawg" >>= fromFile)
 	(Crossword.BidirectionalDictionary $ unsafePerformIO $ getDataFileName "dictWordsCross.dawg" >>= fromFile)
 
+-- | The system dictionary from a gentoo machine. Very basic, not very regular.
 sysDict :: (DictionaryContext a) => a
 sysDict = fromDictionary sysDictDef
 
@@ -27,6 +27,7 @@ ukacdDictDef = Dictionary
   (AnagramDictionary $ unsafePerformIO $ getDataFileName "ukacd-anagram.dawg" >>= fromFile)
   (Crossword.BidirectionalDictionary $ unsafePerformIO $ getDataFileName "ukacd-cross.dawg" >>= fromFile)
 
+-- | The UK Advanced Cryptics Dictionary.
 ukacd :: (DictionaryContext a) => a
 ukacd = fromDictionary ukacdDictDef
 
@@ -55,6 +56,8 @@ onelookR = fromDictionary onelookDictDefR
 onelookDictDef = Dictionary
   (AnagramDictionary $ unsafePerformIO $ getDataFileName "onelook-justletters.anagram.mm.dawg" >>= mapFile)
   (Crossword.BidirectionalDictionary $ unsafePerformIO $ getDataFileName "onelook-justletters.cross.mm.dawg" >>= mapFile)
+
+-- | The onelook dictionary, without frequency data, non-ASCII characters, punctuation, or spaces. Just the letters.
 onelook :: (DictionaryContext a) => a
 onelook = fromDictionary onelookDictDef
 
@@ -62,6 +65,7 @@ sowpodsDictDef = Dictionary
   (AnagramDictionary $ unsafePerformIO $ getDataFileName "sowpods-anagram.dawg" >>= fromFile)
   (Crossword.BidirectionalDictionary $ unsafePerformIO $ getDataFileName "sowpods-cross.dawg" >>= fromFile)
 
+-- | The Collins Scrabble Words dictionary (SOWPODS).
 sowpods :: (DictionaryContext a) => a
 sowpods = fromDictionary sowpodsDictDef
 
