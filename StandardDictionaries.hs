@@ -16,8 +16,8 @@ getDataFileName fn = (++ fn) <$> getEnv "HUNTTOOLS_DICTS_DIR"
 
 sysDictGen = Crossword.buildDict $ words $ map toLower $ unsafePerformIO $ readFile "/usr/share/dict/words"
 sysDictDef = Dictionary 
-	(AnagramDictionary $ unsafePerformIO $ getDataFileName "dictWordsAnagram.dawg" >>= fromFile)
-	(Crossword.BidirectionalDictionary $ unsafePerformIO $ getDataFileName "dictWordsCross.dawg" >>= fromFile)
+        (AnagramDictionary $ unsafePerformIO $ getDataFileName "dictWordsAnagram.dawg" >>= fromFile)
+        (Crossword.BidirectionalDictionary $ unsafePerformIO $ getDataFileName "dictWordsCross.dawg" >>= fromFile)
 
 -- | The system dictionary from a gentoo machine. Very basic, not very regular.
 sysDict :: (DictionaryContext a) => a
